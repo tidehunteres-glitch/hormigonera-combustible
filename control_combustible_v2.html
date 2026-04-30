@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Control Combustible — Hormigonera</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="Control%20Combustible%20%E2%80%94%20Hormigonera_files/xlsx.full.min.js"></script>
+<link href="Control%20Combustible%20%E2%80%94%20Hormigonera_files/css2.css" rel="stylesheet">
 <style>
 :root {
   --bg:#0c0e15; --surf:#13161f; --surf2:#1a1e2b; --surf3:#212538;
@@ -203,12 +203,12 @@ tfoot td{background:var(--surf2);font-weight:600;color:var(--accent);border-top:
   <div class="fg fg3">
     <div class="field">
       <label class="fl">Fecha de carga</label>
-      <input class="fi" id="f-fecha" type="date">
+      <input class="fi" id="f-fecha" type="date" value="2026-04-30">
     </div>
     <div class="field">
       <label class="fl">Equipo / Modelo</label>
       <select class="fi" id="f-equipo">
-        <option value="">— Selecciona —</option>
+        <option value="" selected="selected">— Selecciona —</option>
         <option>F1 Ariel</option>
         <option>F2 Grande</option>
         <option>cr 02</option>
@@ -229,7 +229,7 @@ tfoot td{background:var(--surf2);font-weight:600;color:var(--accent);border-top:
     <div class="field">
       <label class="fl">Tipo de vehículo</label>
       <select class="fi" id="f-tipo">
-        <option>Camion</option>
+        <option selected="selected">Camion</option>
         <option>Bomba</option>
         <option>Camioneta</option>
         <option>Pala</option>
@@ -265,7 +265,7 @@ tfoot td{background:var(--surf2);font-weight:600;color:var(--accent);border-top:
   <div class="fg">
     <div class="field">
       <label class="fl">Fecha trabajo (día anterior)</label>
-      <input class="fi" id="f-fecha-trab" type="date">
+      <input class="fi" id="f-fecha-trab" type="date" value="2026-04-29">
     </div>
     <div class="field">
       <label class="fl">m³ producidos ese día</label>
@@ -296,11 +296,11 @@ tfoot td{background:var(--surf2);font-weight:600;color:var(--accent);border-top:
 <div class="panel" id="tab-datos">
 
   <div class="cards" id="sumCards">
-    <div class="card"><div class="card-lbl">TOTAL GALONES</div><div class="card-val acc" id="s-gal">0.0</div></div>
-    <div class="card"><div class="card-lbl">TOTAL M³</div><div class="card-val acc" id="s-m3">0.00</div></div>
+    <div class="card"><div class="card-lbl">TOTAL GALONES</div><div class="card-val acc" id="s-gal">0.0 Gal</div></div>
+    <div class="card"><div class="card-lbl">TOTAL M³</div><div class="card-val acc" id="s-m3">0.00 m³</div></div>
     <div class="card"><div class="card-lbl">Gal/m³ PROM.</div><div class="card-val grn" id="s-ratio">—</div></div>
     <div class="card"><div class="card-lbl">COSTO TOTAL RD$</div><div class="card-val" id="s-costo">—</div></div>
-    <div class="card"><div class="card-lbl">ENTRADAS (Gal)</div><div class="card-val" id="s-ent">0.0</div></div>
+    <div class="card"><div class="card-lbl">ENTRADAS (Gal)</div><div class="card-val" id="s-ent">0.0 Gal</div></div>
     <div class="card"><div class="card-lbl">REGISTROS</div><div class="card-val" id="s-cnt">0</div></div>
   </div>
 
@@ -308,7 +308,7 @@ tfoot td{background:var(--surf2);font-weight:600;color:var(--accent);border-top:
     <input id="fEq" type="text" placeholder="Filtrar equipo...">
     <input id="fDesde" type="date" title="Desde">
     <input id="fHasta" type="date" title="Hasta">
-    <select id="fTipo"><option value="">Todos los tipos</option><option>Bomba</option><option>Camion</option><option>Camioneta</option><option>Pala</option><option>Guagua</option></select>
+    <select id="fTipo"><option value="" selected="selected">Todos los tipos</option><option>Bomba</option><option>Camion</option><option>Camioneta</option><option>Pala</option><option>Guagua</option></select>
     <button class="btn btn-sm" onclick="applyFilter()">Filtrar</button>
     <button class="btn btn-sm" onclick="clearFilter()">Limpiar</button>
   </div>
@@ -342,7 +342,7 @@ tfoot td{background:var(--surf2);font-weight:600;color:var(--accent);border-top:
       <tfoot id="tFoot"></tfoot>
     </table>
   </div>
-  <div class="empty" id="emptyState" style="display:none">
+  <div class="empty" id="emptyState" style="display: block;">
     <div class="empty-ico">⛽</div>
     Sin registros aún. Agrega el primero en "Nuevo Registro".
   </div>
@@ -367,7 +367,157 @@ tfoot td{background:var(--surf2);font-weight:600;color:var(--accent);border-top:
           <th>Activo</th>
         </tr>
       </thead>
-      <tbody id="bmBody"></tbody>
+      <tbody id="bmBody">
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="F1 Ariel" onchange="benchmarks[0].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[0].tipo=this.value">
+        <option selected="selected">Bomba</option>
+        <option>Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.5" onchange="benchmarks[0].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.5" onchange="benchmarks[0].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="4" onchange="benchmarks[0].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="15" onchange="benchmarks[0].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[0].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="F2 Grande" onchange="benchmarks[1].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[1].tipo=this.value">
+        <option selected="selected">Bomba</option>
+        <option>Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.5" onchange="benchmarks[1].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.5" onchange="benchmarks[1].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="4" onchange="benchmarks[1].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="15" onchange="benchmarks[1].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[1].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="cr 02" onchange="benchmarks[2].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[2].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.8" onchange="benchmarks[2].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.4" onchange="benchmarks[2].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.2" onchange="benchmarks[2].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[2].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[2].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="cr 04" onchange="benchmarks[3].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[3].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.8" onchange="benchmarks[3].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.4" onchange="benchmarks[3].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.2" onchange="benchmarks[3].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[3].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[3].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="cr 05" onchange="benchmarks[4].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[4].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.8" onchange="benchmarks[4].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.4" onchange="benchmarks[4].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.2" onchange="benchmarks[4].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[4].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[4].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="cr 06" onchange="benchmarks[5].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[5].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.8" onchange="benchmarks[5].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.4" onchange="benchmarks[5].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.2" onchange="benchmarks[5].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[5].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[5].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="cr 07" onchange="benchmarks[6].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[6].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.8" onchange="benchmarks[6].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.4" onchange="benchmarks[6].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.2" onchange="benchmarks[6].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[6].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[6].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="Sterlin" onchange="benchmarks[7].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[7].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.9" onchange="benchmarks[7].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.5" onchange="benchmarks[7].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.4" onchange="benchmarks[7].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[7].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[7].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="shackman" onchange="benchmarks[8].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[8].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.9" onchange="benchmarks[8].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.5" onchange="benchmarks[8].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.4" onchange="benchmarks[8].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[8].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[8].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><input style="background:transparent;border:none;color:var(--text);font-family:var(--mono);font-size:.76rem;width:100%" value="volteo roso" onchange="benchmarks[9].equipo=this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[9].tipo=this.value">
+        <option>Bomba</option>
+        <option selected="selected">Camion</option>
+      </select></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="0.8" onchange="benchmarks[9].min=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--accent);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="1.4" onchange="benchmarks[9].opt=+this.value"></td>
+      <td class="num"><input type="number" step="0.1" style="background:transparent;border:none;color:var(--red);font-family:var(--mono);font-size:.76rem;width:70px;text-align:right" value="2.2" onchange="benchmarks[9].max=+this.value"></td>
+      <td class="num"><input type="number" step="1" style="background:transparent;border:none;color:var(--muted2);font-family:var(--mono);font-size:.76rem;width:55px;text-align:right" value="20" onchange="benchmarks[9].tol=+this.value"></td>
+      <td><select style="background:var(--surf2);border:1px solid var(--bord);color:var(--text);font-family:var(--mono);font-size:.73rem;border-radius:4px;padding:2px 4px" onchange="benchmarks[9].activo=this.value==='SI'">
+        <option selected="selected">SI</option>
+        <option>NO</option>
+      </select></td>
+    </tr></tbody>
     </table>
   </div>
   <div style="margin-top:1rem;display:flex;gap:8px">
@@ -495,7 +645,7 @@ Extrae los datos y responde ÚNICAMENTE con JSON válido, sin markdown ni backti
 Si no ves un dato, usa null. Para fecha usa formato YYYY-MM-DD.`;
 
   try{
-    const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+    const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,{
       method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({contents:[{parts:[
         {inline_data:{mime_type:currentMime,data:currentB64}},
@@ -874,5 +1024,6 @@ function exportExcel(){
   XLSX.writeFile(wb,`combustible_hormigonera_${month}.xlsx`);
 }
 </script>
-</body>
-</html>
+
+
+</body></html>
